@@ -1,0 +1,19 @@
+baseURL = 'https://example.org/'
+locale  = 'en-us'
+title   = 'Echo Nayak'
+theme   = "PaperMod"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[[menu.main]]
+  name = "Posts"
+  url = "/posts/"
+  weight = 10
+
+[[menu.main]]
+  name = "Contact"
+  url = "/contact/"
+  weight = 20

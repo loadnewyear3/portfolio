@@ -1,0 +1,14 @@
+/*
+  Cross-Origin-Resource-Policy: same-origin
+  X-Content-Type-Options: nosniff
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+  Content-Security-Policy: default-src 'self';
+    script-src 'self' https://gc.zgo.at;
+    style-src 'self' https://cdn.jsdelivr.net;
+    connect-src 'self' https://*.goatcounter.com;
+    img-src 'self' data:;
+    frame-src 'self' https://www.youtube.com https://player.vimeo.com;
+    object-src 'none';
+    base-uri 'self';
+    form-action 'self';
+    frame-ancestors 'none';

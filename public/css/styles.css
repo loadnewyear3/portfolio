@@ -1,0 +1,1644 @@
+/*
+==========================================================================
+    1. Global Setup & Base Styles
+==========================================================================
+*/
+
+/* Universal box-sizing and a debug outline */
+* 
+{
+   /* outline: 1px solid rgb(1, 196, 255); /* Comment out this line in production */
+    box-sizing: border-box;
+    max-width: 100%;
+}
+
+/* Prevents horizontal scrollbars on the body */
+body {
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
+/*
+==========================================================================
+    2. Header & Navigation
+==========================================================================
+*/
+
+/* Header styles */
+header.site-header {
+    height: 50px;
+    min-height: 50px;
+    display: flex;
+    color: #000; /* Default text/icon colour for header content */
+    align-items: center;
+    background: #fff;
+    border-bottom: 0px solid;
+    width: 100%;
+    z-index: 1200;
+}
+
+header {
+    display: flex;
+    color: #000; /* Default text/icon colour for header content */
+    align-items: center;
+    background-color: white;
+    border-bottom: 1px solid #ccc;
+}
+
+/* Navigation container styles */
+.nav-container {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+    padding: 0 2em;
+    position: relative;
+    gap: 2em;
+    z-index: 1201; /* optional, if needed */
+}
+
+/* Logo link container */
+.logo-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 50px;   /* Match header height */
+    width: 50px;    /* Or whatever fits your design */
+}
+
+/* Logo and home icon images */
+.logo,
+.home-icon {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    transition: opacity 0.3s;
+    display: block;
+    transform: translateY(-50%);
+}
+
+.home-icon {
+    opacity: 0;
+}
+
+.logo-link:hover .logo {
+    opacity: 0;
+}
+
+.logo-link:hover .home-icon {
+    opacity: 1;
+}
+
+/* Navigation menu styles */
+nav ul {
+    display: contents;
+    list-style: none;
+}
+
+nav ul li {
+    margin-right: 1em;
+    text-decoration: none;
+}
+
+nav ul li a {
+    color: black;
+    text-decoration: none;
+}
+
+nav ul li a:hover {
+    text-decoration: none;
+    color: #555;
+    text-decoration: none;
+}
+
+/* Hamburger styles */
+.hamburger {
+    margin-left: auto;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 40px; /* or less than 50px */
+    color: inherit; /* Ensures the hamburger inherits its colour from the header */
+}
+
+/* Ensure no unwanted hover effects on the hamburger icon */
+.hamburger:hover,
+.hamburger:focus,
+.hamburger:active {
+    background: none; /* Remove any background colour/image on hover */
+    border-color: transparent; /* Remove any border colour change on hover */
+    color: inherit; /* ensure text colour continues to inherit from the header's colour property */
+    outline: none; /* Remove the default browser focus outline */
+}
+
+.hamburger-inner,
+.hamburger-inner::before,
+.hamburger-inner::after {
+  background-color: currentColor; /* Inherits colour from parent (header's colour property) */
+}
+
+/* Responsive nav */
+@media (max-width: 800px) {
+    .main-nav {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: calc(50px);    /* header height (50px)  */
+        width: 100%;
+        height: calc(125vh - 50vh);
+        background: #ffffff;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        z-index: 1100;
+        box-sizing: border-box;
+    }
+    .main-nav.open {
+        display: flex;
+    }
+    .main-nav ul {
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+    }
+    .main-nav ul li {
+        margin: 1em 0;
+    }
+    .hamburger {
+        display: flex;
+    }
+    .nav-container {
+        position: relative;
+            /* Theme variables - allow nav background to adapt to light/dark */
+        }
+        :root {
+            --nav-bg: #ffffff;
+    }
+    .main-nav {
+        padding-top: 0; /* Remove padding to align with header */
+    }
+}
+
+/* Hide hamburger on desktop */
+@media (min-width: 800px) {
+    .main-nav {
+        display: flex !important;
+        position: static;
+        background: none;
+        box-shadow: none;
+        flex-direction: row;
+        align-items: center;
+    }
+    .hamburger {
+        display: none;
+    }
+}
+
+/*
+==========================================================================
+    3. Page Headers & Breadcrumbs
+==========================================================================
+*/
+
+/* Styles for the breadcrumb navigation bar */
+.breadcrumbs {
+    /* Make it subtle and text-based, not a prominent block */
+    padding: 0; /* No padding on the container itself */
+    margin-bottom: 1em; /* Space below the breadcrumbs, before the main content grid */
+    background-color: transparent; /* No background */
+    border-radius: 0; /* No border-radius */
+    font-size: 0.9em; /* Slightly smaller font size for subtlety */
+    color: #555; /* A subtle colour for the text */
+}
+
+.breadcrumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0; /* No padding on the list itself */
+    margin: 0; /* No margin on the list itself */
+    list-style: none;
+    line-height: 1.5; /* Add line-height for better spacing if it wraps */
+}
+
+.breadcrumbs li {
+    word-break: break-word; /* Break very long titles/words to prevent overflow */
+}
+
+.breadcrumbs li:not(:last-child)::after {
+    content: "/";
+    padding: 0 0.3em; /* Creates a small, consistent space on either side */
+    color: #555; /* Match breadcrumb text colour */
+}
+
+.breadcrumbs a {
+    text-decoration: none;
+    color: #555; /* Default link colour for breadcrumbs */
+}
+
+.breadcrumbs a:hover {
+    text-decoration: none;
+    color: #000; /* Darker on hover */
+}
+
+/* Specific styling for the last item in the breadcrumbs (the current page title) */
+.breadcrumbs li:last-child {
+    font-weight: bold; /* Make the current page title stand out */
+    color: #000; /* Ensure it's black in light mode */
+}
+
+.breadcrumbs li:last-child a {
+    color: inherit; /* Inherit colour from parent li */
+    text-decoration: none;
+}
+
+
+
+/*
+==========================================================================
+    4. Main Content Sections
+==========================================================================
+*/
+
+/* --- 4a. Not Found (404) Page --- */
+
+/* Not found page styles */
+.notfound-container {
+    text-align: center;
+    padding: 2em;
+}
+
+.notfound-container h1 {
+    font-size: 2.5em;
+    margin-bottom: 0.5em;
+}
+
+.notfound-container p {
+    margin-bottom: 1em;
+}
+
+.notfound-container a {
+    color: #000000;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.2s;
+}
+
+.notfound-container a:hover {
+    color: #555;
+    text-decoration: none;
+}
+
+/* --- 4b. News Page --- */
+
+/* News timeline styles */
+.news-timeline {
+    max-width: 700px;
+    margin: 2em auto;
+    padding: 0 1em;
+}
+.news-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 2em;
+    border-left: 3px solid #ccc;
+    padding-left: 1.5em;
+    position: relative;
+}
+.news-date {
+    font-size: 0.9em;
+    color: #555;
+    min-width: 110px;
+    margin-right: 1em;
+    flex-shrink: 0;
+}
+.news-content h2 {
+    margin: 0 0 0.2em 0;
+    font-size: 1.2em;
+}
+.news-content h2 a {
+    color: black;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.news-content h2 a:hover {
+    color: #555;
+    text-decoration: none;
+}
+.news-content p {
+    margin: 0;
+    color: #444;
+}
+.news-item::before {
+    content: "";
+    position: absolute;
+    left: -10px;
+    width: 12px;
+    height: 12px;
+    background: #fff;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+}
+
+/* Styling for preformatted text/code blocks (```) within news posts */
+.news-body pre {
+    position: relative; /* Needed to position the copy button */
+    white-space: pre-wrap;       /* Allows text to wrap */
+    word-break: break-all;       /* Breaks long words/URLs that would otherwise overflow */
+    background-color: #f4f4f4;   /* A light grey background to distinguish the block */
+    padding: 1em;                /* Some padding inside the block */
+    border-radius: 4px;          /* Rounded corners */
+    overflow-x: auto;            /* Add a scrollbar if content still overflows, as a fallback */
+}
+
+/* Copy to Clipboard Button for Code Blocks */
+.copy-code-button {
+    position: absolute;
+    bottom: 0.5em;
+    right: 0.5em;
+    background-color: #e0e0e0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 0.25em 0.5em;
+    font-size: 0.8em;
+    cursor: pointer;
+    color: #333;
+    transition: background-color 0.2s;
+    z-index: 10;
+}
+
+@media (max-width: 800px) {
+    .news-body pre {
+        padding-bottom: 3.5em;
+    }
+    .copy-code-button {
+        top: auto;
+        bottom: 0.75em;
+        left: auto;
+        transform: none;
+        right: 0.5em;
+    }
+}
+
+.copy-code-button.copied {
+    background-color: #a5d6a7; /* A green colour for success */
+    color: #1b5e20;
+}
+
+/* --- 4c. Side Projects Page --- */
+
+/* Styles for the main category list on /side-projects/ */
+
+/* Container for the entire list of categories */
+.project-category-list {
+    max-width: 700px; /* As per your news page example */
+    margin: 2em auto; /* Centres the list horizontally */
+    padding: 0 1em; /* Adds some padding on smaller screens */
+}
+
+/* Individual category list item (the clickable link) */
+.category-list-item {
+    display: flex; /* Use flexbox for icon and text alignment */
+    align-items: center; /* Vertically centers items within the flex container */
+    gap: 1.5em; /* Space between the icon wrapper and the text info */
+    
+    padding: 1em;
+    margin-bottom: 1em; /* Space between list items */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    text-decoration: none;
+    color: inherit; /* Inherit text colour from parent */
+}
+
+/* Wrapper for the category icon */
+.category-list-icon-wrapper {
+    flex-shrink: 0; /* Prevents the icon from shrinking */
+    width: 80px; /* Fixed width for the icon container */
+    height: 80px; /* Fixed height for the icon container */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e9e9e9; /* Light background for the icon square */
+    border-radius: 4px;
+    padding: 0.5em; /* Padding inside the icon square */
+}
+
+/* The actual icon image */
+.category-icon {
+    max-width: 100%; /* Ensures icon fits within its wrapper */
+    max-height: 100%; /* Ensures icon fits within its wrapper */
+    object-fit: contain; /* Scales icon down to fit without cropping */
+}
+
+/* Container for the category title and project count */
+.category-list-info h2 {
+    margin: 0; /* Remove default margin */
+    font-size: 1.5em; /* Make the category name prominent */
+}
+
+.category-list-info p {
+    margin: 0; /* Remove default margin */
+    color: #555;
+}
+
+/* Styles for the grid of individual projects within a category */
+
+/* Grid for projects WITHIN a category */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5em;
+    padding: 1em;
+    max-width: 1200px;
+    margin: 2em auto;
+}
+
+/* Individual project item card */
+.project-item {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+    background-color: #f9f9f9;
+    /* New flex properties to push buttons to the bottom */
+    display: flex;
+    min-width: 200px; /* Ensure it doesn't get too narrow */
+    max-width: 100%; /* Adapt to available width */
+    width: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* The main clickable area of the project card (title and summary) */
+.project-card-main-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    flex-grow: 1; /* Allows this area to expand, pushing buttons down */
+}
+
+/* Container for the project title and summary */
+.project-info { padding: 1em; }
+.project-info h2 { margin: 0 0 0.2em 0; font-size: 1.3em; }
+.project-info p { margin: 0; font-size: 0.9em; color: #555; }
+
+/* Container for additional project buttons */
+.project-buttons {
+    display: flex;
+    flex-wrap: wrap; /* Allow links to wrap to the next line */
+    justify-content: center; /* Center links horizontally */
+    gap: 0.5em 1.5em; /* Vertical and horizontal gap for links */
+    padding: 0 1em 1em 1em; /* Padding at the bottom of the card */
+}
+
+/* Individual project button style */
+.project-button {
+    display: inline-block;
+    text-decoration: none;
+    font-size: 0.9em;
+    color: #000; /* Standard black for text links */
+    transition: color 0.2s;
+}
+
+.project-button:hover {
+    color: #555; /* Standard gray for link hover */
+}
+
+/* --- 4d. Generic Page Content --- */
+
+/* Styles for page content/description below the title */
+.page-content {
+    max-width: 800px;
+    margin: 0 auto 2em auto;
+    padding: 0 1em;
+    line-height: 1.6;
+}
+
+.page-content p {
+    margin-bottom: 1em;
+}
+
+/* --- 4e. Photos Page --- */
+
+/* --- Unified Photo Grid Styles --- */
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5em;
+    padding: 1em;
+    max-width: 1200px;
+    margin: 0 auto;
+    min-width: 200px; /* Ensure it doesn't get too narrow */
+    width: 100%; /* Take full width of parent */
+}
+
+.photo-grid-item {
+    border-radius: 4px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    /*border: 1px solid #ccc; Uncomment if you want a border */
+    /*background-color: #f9f9f9; */
+}
+
+.photo-grid-item img {
+    width: 100%;
+    height: 250px;
+    object-fit: contain; /* Changed to contain to show full image */
+    display: block;
+}
+
+.photo-grid-item-info {
+    padding: 1em;
+    text-align: center;
+}
+
+.photo-grid-item-info h2 {
+    margin: 0;
+    font-size: 1.3em;
+}
+
+/* Styles for a photo detail page (single or gallery) */
+.photo-detail-container {
+    max-width: 1200px; /* Sets a max width for the content area */
+    margin: 2em auto;  /* Vertical spacing and horizontal centering */
+    padding: 0 1em;    /* Padding for smaller screens */
+    text-align: center; /* Center-aligns the links below the image */
+}
+
+.photo-detail-container img {
+    width: 80%;        /* As requested, make the image 80% of the container */
+    max-width: 100%;   /* Ensure it doesn't exceed container if 80% is too large */
+    height: auto;      /* Maintain aspect ratio */
+    display: block;
+    margin: 0 auto 2em auto; /* Center the image and add space below it */
+    border-radius: 4px; /* Consistent rounded corners */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+.photo-links {
+    display: flex;
+    flex-direction: column; /* Stack links vertically */
+    align-items: center;    /* Center links horizontally */
+    gap: 1em;               /* Space between links */
+}
+
+.photo-link {
+    color: #000;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.photo-link:hover { color: #555; }
+
+/* --- 4f. Lightbox --- */
+
+.lightbox-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: none; /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    -webkit-tap-highlight-color: transparent; /* Prevents flash on mobile tap */
+}
+
+.lightbox-overlay.active {
+    display: flex; /* Shown with JS */
+}
+
+.lightbox-content img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain; /* Preserve aspect ratio */
+    box-shadow: 0 0 25px rgba(0,0,0,0.5);
+}
+
+.lightbox-close, .lightbox-prev, .lightbox-next {
+    position: absolute;
+    color: white;
+    font-size: 2.5em;
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.2s;
+    z-index: 2001;
+}
+
+.lightbox-close:hover, .lightbox-prev:hover, .lightbox-next:hover { color: #ccc; }
+.lightbox-close { top: 15px; right: 35px; }
+.lightbox-prev { top: 50%; left: 2%; transform: translateY(-50%); }
+.lightbox-next { top: 50%; right: 2%; transform: translateY(-50%); }
+
+/* --- 4g. Discography Page --- */
+
+/* Unified button styling for consistent height and appearance */
+.action-button {
+    background: none;
+    border: 1px solid #ccc;
+    padding: 0.5em 1em;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #000;
+    transition: background-color 0.2s, color 0.2s;
+    text-decoration: none; /* Ensure links don't have default underline */
+    display: inline-block; /* Ensure padding and other properties apply correctly */
+    font-family: inherit; /* Inherit font from body for consistency */
+    font-size: 1em; /* Standard font size for buttons */
+    line-height: 1.2; /* Consistent line height */
+    font-weight: normal; /* Ensure consistent font weight */
+}
+
+.action-button:hover,
+.action-button.active { /* For filter buttons' active state */
+    background-color: #000;
+    color: #fff;
+}
+
+.filter-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5em; /* Controls spacing between buttons, both horizontally and vertically */
+    margin-bottom: 2em;
+}
+
+.filter-btn {
+    /* Spacing is now handled by the container's 'gap' property */
+    margin: 0;
+}
+
+.discography-grid {
+    display: grid;
+    /* Allow items to grow, but cap their individual max-width to prevent excessive stretching */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    justify-content: center; /* Centers the grid items within the container */
+    gap: 1.5em;
+    padding: 1em;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Increase minimum column width on larger screens to force earlier wrapping */
+@media (min-width: 600px) {
+    .discography-grid {
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    }
+}
+
+.discography-item {
+    text-decoration: none;
+    color: inherit;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    display: flex;
+    width: 100%;
+    max-width: 350px; /* Cap individual item width to prevent excessive stretching */
+    margin: 0 auto;
+    flex-direction: column;
+}
+
+/* New wrapper for the image to control its height and background */
+.discography-item-image-wrapper {
+    height: 250px;
+    background-color: #f0f0f0; /* For letterboxing */
+}
+
+.discography-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.discography-item-info {
+    padding: 1em;
+    text-align: center;
+    border-top: 1px solid #eee;
+}
+
+.discography-item-info h3 {
+    margin: 0;
+    font-size: 1.1em;
+    color: #000;
+}
+
+.discography-item-info p {
+    margin: 0.5em 0 0 0;
+    font-size: 0.9em;
+    color: #555;
+}
+
+/* Styles for items that are text-only placeholders */
+.discography-item.placeholder {
+    /* These properties center the text vertically and horizontally */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /* Calculate total height to match items with art (image height + info box padding/height) */
+    min-height: 320px;
+}
+
+.discography-item.placeholder h3 {
+    font-size: 1.3em;
+    margin: 0; /* Remove margin to ensure perfect centering */
+}
+
+.discography-item.placeholder p {
+    margin: 0.5em 0 0 0;
+    font-size: 0.9em;
+    color: #555;
+    padding: 0 1em; /* Add some padding to prevent long text from touching edges */
+}
+
+/* Generic placeholder for items with no image (used on Photos page) */
+.placeholder-image {
+    width: 100%;
+    height: 250px;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #aaa;
+    font-size: 1.2em;
+    border-bottom: 1px solid #ccc;
+}
+
+/* --- 4h. Discography Detail Page --- */
+
+.discography-detail-container {
+    min-width: 70%;
+    max-width: 1000px;
+    margin: 2em auto;
+    padding: 1em;
+}
+
+.discography-detail-grid {
+    /* The grid itself doesn't need a max-width, it will fill its container */
+    display: grid;
+    grid-template-columns: 300px 1fr; /* Fixed width for cover art, flexible for info */
+    gap: 2em;
+}
+
+.discography-extended-container {
+    max-width: 1200px; /* Wider container for the tracklist */
+    margin: 2em auto;
+    padding: 1em;
+}
+
+.detail-cover-art-wrapper {
+    width: 300px;
+    height: 300px;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.detail-cover-art-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Read More Button */
+.read-more-btn {
+    display: inline-block;
+    background-color: #000;
+    color: #fff;
+    padding: 0.5em 1em;
+    border-radius: 4px;
+    font-size: 0.9em;
+    text-decoration: none;
+    border: 1px solid #000;
+    transition: all 0.2s ease;
+}
+
+.read-more-btn:hover {
+    background-color: transparent;
+    color: #000;
+}
+
+.detail-info-wrapper h1 {
+    margin: 0 0 0.25em 0;
+    font-size: 2.2em;
+}
+
+.detail-info-line {
+    color: #555;
+    margin-bottom: 2em;
+    font-size: 1.1em;
+}
+
+.detail-links-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75em;
+}
+
+/*.detail-link-button {
+    /* This class now inherits all its styles from .action-button and has no specific styles of its own */
+/*}*/
+
+@media (max-width: 800px) {
+    .discography-detail-grid {
+        grid-template-columns: 1fr; /* Stack columns on smaller screens */
+        text-align: center;
+    }
+    .detail-cover-art-wrapper {
+        margin: 0 auto 1em auto; /* Center the cover art */
+    }
+    .detail-links-container {
+        justify-content: center; /* Center the link buttons */
+    }
+}
+
+.add-to-any-container {
+    display: flex;
+    justify-content: center;
+}
+
+/* --- Discography Extended Info (Annotation & Tracklist) --- */
+.discography-extended-info {
+    margin-top: 3em;
+}
+
+.release-annotation {
+    margin: 0 auto 2em auto;
+    line-height: 1.6;
+    max-width: 800px; /* Constrain annotation text for readability */
+}
+
+.release-annotation h3,
+.release-tracklist h3 {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 0.5em;
+    margin-bottom: 1em;
+}
+
+/* Tracklist Collapsible */
+.release-tracklist details {
+    margin-bottom: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.release-tracklist summary {
+    padding: 0.75em 1em;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    font-weight: bold;
+    list-style: none; /* Hide default triangle in some browsers */
+    display: flex;
+    justify-content: flex-start;
+    gap: 0; /* Remove gap to use margins for precise spacing */
+    align-items: center;
+}
+
+/* Custom arrow for summary */
+.summary-arrow::after {
+    content: '▶'; /* Right arrow for collapsed state */
+    font-size: 0.8em;
+    display: inline-block;
+    width: 1em;
+    text-align: center;
+}
+
+.medium-number {
+    margin-right: 0.5em;
+}
+
+.summary-arrow {
+    margin-right: 0.5em;
+}
+
+.release-tracklist details[open] .summary-arrow::after {
+    content: '▼'; /* Down arrow for expanded state */
+}
+
+/* Hide default marker */
+.release-tracklist summary::-webkit-details-marker {
+    display: none;
+}
+
+.tracklist-content {
+    padding: 1em;
+    background-color: #fff;
+    overflow-x: auto; /* Handle small screens */
+}
+
+/* Tracklist Table Styles */
+.tracklist-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95em;
+}
+
+.tracklist-table th,
+.tracklist-table td {
+    padding: 0.5em;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.tracklist-table th {
+    background-color: #f9f9f9;
+    color: #555;
+    font-weight: bold;
+}
+
+.track-pos-header, .track-pos {
+    width: 3em;
+    text-align: right;
+    padding-right: 1em;
+}
+
+.track-length-header, .track-length {
+    width: 5em;
+    text-align: right;
+}
+
+.track-length {
+    color: #777;
+    font-family: monospace;
+}
+
+.track-artist-header, .track-artist {
+    width: 25%;
+    text-align: left;
+}
+
+.track-credits {
+    font-size: 0.9em;
+    color: #666;
+    margin-left: 1.5em; /* Indentation inward from the title */
+    margin-top: 0.2em;
+    font-style: italic;
+    display: block;
+}
+
+/* --- 4i. Homepage --- */
+
+.homepage-intro {
+    text-align: center;
+    margin: 2em auto 3em auto;
+    max-width: 700px;
+    padding: 0 1em;
+}
+
+.homepage-intro h1 {
+    font-size: 2.5em;
+    margin-bottom: 0.25em;
+}
+
+.homepage-grid {
+    display: grid;
+    /* Keep three equal columns on wider screens so cards only wrap
+       when the layout reaches the hamburger breakpoint (800px). */
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2em;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1em;
+}
+
+/* Make grid items stretch and create equal row sizing behavior.
+   Note: CSS Grid calculates each row height independently; rows match the tallest
+   item in that row. Setting `grid-auto-rows: 1fr` helps make implicit rows use
+   fractional units so items can grow more uniformly. */
+.homepage-grid {
+    align-items: stretch;
+    grid-auto-rows: 1fr;
+}
+
+/* Ensure the grid children (either an anchor wrapper or the card itself)
+   fill their grid cell and use column flex layout so content can stretch.
+   This keeps cards the same height within a row and helps them grow when
+   implicit rows are driven by `grid-auto-rows`. */
+.homepage-grid > .homepage-card-link,
+.homepage-grid > .homepage-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.homepage-card {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Ensures cards in the same row have the same height */
+    flex: 1 1 auto; /* Allow cards to grow to fill the grid cell */
+    min-height: 0; /* Allow flex children to shrink properly */
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.homepage-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block; /* Ensures the link wrapper behaves like a block */
+}
+
+.homepage-card-link:hover .homepage-card {
+    /* A more subtle hover effect: change border colour and add shadow */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-color: #999;
+}
+
+.card-header {
+    padding: 1em;
+    border-bottom: 1px solid #eee;
+}
+
+.card-header h3 {
+    margin: 0;
+    font-size: 1.3em;
+}
+
+.card-content {
+    padding: 1em;
+    flex-grow: 1; /* Makes content area expand */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Ensure inner flex items can shrink to avoid overflowing their grid cell */
+.card-content,
+.card-image-wrapper {
+    min-height: 0;
+}
+
+/* At the same breakpoint as the navigation hamburger (800px),
+     force the homepage cards to stack vertically so the visual order
+     and sizing remain consistent when the layout collapses. */
+@media (max-width: 800px) {
+    .homepage-grid {
+        grid-template-columns: 1fr; /* single column layout */
+        grid-auto-rows: auto;
+        gap: 1.25em;
+    }
+
+    /* Let card wrappers size naturally when stacked */
+    .homepage-grid > .homepage-card-link,
+    .homepage-grid > .homepage-card {
+        height: auto;
+    }
+}
+
+/*
+  Class-based mobile override controlled by JS. The `is-mobile` class is
+  toggled on <html> using the single breakpoint constant in
+  `static/js/scripts.js`. This lets you change the breakpoint in one place
+  without editing multiple media queries.
+*/
+.is-mobile .main-nav {
+    position: absolute !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: calc(50px) !important;
+    width: 100% !important;
+    height: calc(125vh - 50vh) !important;
+    background: #ffffff !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+    display: none !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    z-index: 1100 !important;
+    box-sizing: border-box !important;
+}
+.is-mobile .main-nav.open {
+    display: flex !important;
+}
+.is-mobile .main-nav ul {
+    flex-direction: column !important;
+    width: 100% !important;
+    align-items: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.is-mobile .main-nav ul li {
+    margin: 1em 0 !important;
+}
+.is-mobile .hamburger {
+    display: flex !important;
+}
+
+/* Homepage grid mobile override */
+.is-mobile .homepage-grid {
+    grid-template-columns: 1fr !important;
+    grid-auto-rows: auto !important;
+    gap: 1.25em !important;
+}
+.is-mobile .homepage-grid > .homepage-card-link,
+.is-mobile .homepage-grid > .homepage-card {
+    height: auto !important;
+}
+
+.card-content h4 {
+    margin: 0 0 0.5em 0;
+    font-size: 1.2em;
+}
+
+.card-meta {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 1em;
+}
+
+.card-content p {
+    margin: 0 0 1em 0;
+    margin: 1em 0;
+    flex-grow: 1; /* Pushes link to the bottom */
+}
+
+.card-image-wrapper {
+    flex-grow: 1; /* Pushes link to the bottom in cards without a summary paragraph */
+    margin-bottom: 1em;
+    height: 200px; /* Set a fixed height for the container */
+    background-color: #f0f0f0; /* Add a background for letterboxing */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+}
+
+.card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* This will prevent cropping and letterbox inside the wrapper */
+}
+
+.card-link {
+    font-weight: bold;
+    color: #000;
+    transition: color 0.2s ease-in-out;
+}
+
+.homepage-card-link:hover .card-link {
+    color: #555;
+}
+
+/*
+==========================================================================
+    5. Footer
+==========================================================================
+*/
+
+/* Footer columns layout */
+.site-footer {
+    background: #fff;
+    color: #111;
+    padding: 2em 0 1em 0;
+    margin-top: 3em;
+}
+
+.footer-columns {
+    display: flex;
+    justify-content: center;
+    gap: 4em;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.footer-col {
+    flex: 1 1 0;
+    text-align: center;
+}
+
+.footer-col h3 {
+    margin-bottom: 0.5em;
+    font-size: 1.2em;
+    color: #111;
+}
+
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-col ul li {
+    margin: 20px 0;
+}
+
+.footer-col a {
+    color: #111;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-col a:hover {
+    color: #555;
+    text-decoration: none;
+}
+
+/* Footer icon styles */
+.footer-icon {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    margin-right: 0.5em;
+}
+
+/* Responsive: stack columns on small screens */
+@media (max-width: 800px) {
+    .footer-columns {
+        flex-direction: column;
+        gap: 2em;
+    }
+}
+
+/* Back to top link styles at very bottom */
+.footer-backtotop {
+    text-align: center;
+    margin-top: 2em;
+}
+
+.footer-backtotop a {
+    color: #111;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.2s;
+}
+
+.footer-backtotop a:hover {
+    color: #555;
+}
+
+/* Footer meta (theme credit and terms) */
+.footer-meta {
+    text-align: center;
+    margin-top: 1em;
+    font-size: 10px;
+    color: #666;
+}
+
+.footer-meta p {
+    margin: 0.2em 0;
+}
+
+.footer-meta a {
+    color: #666;
+    text-decoration: none;
+}
+
+.footer-meta a:hover {
+    color: #999;
+}
+
+/*
+==========================================================================
+    6. Dark Mode Overrides
+==========================================================================
+*/
+
+/* Base light mode styles (some are defaults, some are explicit) */
+
+/* Light mode defaults (many are already implicitly set by browser or existing rules) */
+body {
+    background-color: #fff;
+    color: #000;
+    /* max-width and overflow-x are already defined elsewhere */
+}
+
+/* All dark mode styles are contained within this single media query */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #000;
+        color: #fff;
+    }
+
+    header.site-header,
+    header {
+        background: #000;
+        color: #fff; /* Text and hamburger (via currentColour) will be white */
+       /* border-bottom-color: #333; /* Darker border for dark mode */
+    }
+
+    /* Logos are black by default; invert them to white for dark mode */
+    .logo,
+    .home-icon {
+        filter: invert(100%);
+    }
+
+    /* General link colour for dark mode */
+    a {
+        color: #fff;
+    }
+
+    /* Specific link adjustments for dark mode */
+    nav ul li a {
+        color: #fff;
+    }
+    nav ul li a:hover {
+        color: #ccc; /* Lighter gray for hover in dark mode */
+    }
+
+    /* Ensure active hamburger "X" is white in dark mode */
+    /* This assumes the active hamburger has the class '.is-active' */
+    .hamburger.is-active .hamburger-inner,
+    .hamburger.is-active .hamburger-inner::before,
+    .hamburger.is-active .hamburger-inner::after {
+        background-color: #fff; /* Explicitly set to white for the "X" state */
+    }
+
+    /* Keep hamburger fully opaque in dark mode on interaction */
+    .hamburger:hover,
+    .hamburger:focus,
+    .hamburger:active {
+        opacity: 1 !important; /* Force override of library's hover opacity */
+    }
+
+    /* Responsive nav background in dark mode */
+    @media (max-width: 800px) {
+        .main-nav {
+            background: #111; /* Dark background for mobile menu dropdown */
+            /* Consider enabling box-shadow for dark mode if it looks off */
+            /* box-shadow: 0 2px 8px rgba(255, 255, 255, 0.05); */
+        }
+    }
+
+    /* Ensure .is-mobile override respects dark mode */
+    .is-mobile .main-nav {
+        background: #111 !important;
+    }
+
+    /* Update nav background variable so .is-mobile .main-nav follows dark theme */
+    :root {
+        --nav-bg: #111;
+    }
+
+    /* Not found page dark mode */
+    .notfound-container a { color: #fff; }
+    .notfound-container a:hover { color: #ccc; }
+
+    /* News timeline dark mode */
+    .news-timeline { /* Corrected selector for the main timeline border */
+        border-left-color: #555; /* Sets the main vertical line colour in dark mode */
+    }
+    .news-date {
+        color: #aaa;
+    }
+    .news-content h2 a {
+        color: #fff;
+    }
+    .news-content h2 a:hover {
+        color: #ccc;
+    }
+    .news-content p {
+        color: #bbb;
+    }
+    .news-item::before { /* The dot on the timeline */
+        background: #000; /* Match body background */
+        border-color: #555;
+    }
+
+    /* News post code blocks dark mode */
+    .news-body pre {
+        background-color: #1a1a1a;
+        border: 1px solid #444;
+    }
+
+    /* Copy button dark mode */
+    .copy-code-button {
+        background-color: #333;
+        border-color: #555;
+        color: #eee;
+    }
+
+    .copy-code-button.copied {
+        background-color: #2e7d32; /* Darker green for dark mode */
+        color: #e8f5e9;
+    }
+
+    /* Breadcrumbs Dark Mode */
+    .breadcrumbs {
+        background-color: transparent; /* No background in dark mode either */
+        border: none; /* No border */
+        color: #aaa; /* Lighter subtle colour */
+    }
+    .breadcrumbs a {
+        color: #8ab4f8; /* A pleasant blue for links in dark mode */
+    }
+    .breadcrumbs a:hover {
+        color: #b3d4ff; /* Lighter blue on hover */
+    }
+    .breadcrumbs li:not(:last-child)::after {
+        color: #aaa; /* Match separator colour in dark mode */
+    }
+    .breadcrumbs li:last-child {
+        color: #fff; /* White for current page title in dark mode */
+    }
+
+    /* Homepage Dark Mode */
+    .homepage-card {
+        border-color: #444;
+        background-color: #1a1a1a;
+    }
+    .homepage-card-link:hover .homepage-card {
+        box-shadow: 0 4px 15px rgba(255,255,255,0.08);
+        border-color: #777;
+    }
+    .card-header {
+        border-bottom-color: #333;
+    }
+    .card-image-wrapper {
+        background-color: #222; /* Dark background for letterboxing */
+    }
+    .card-meta {
+        color: #aaa;
+    }
+    .card-link {
+        color: #fff;
+    }
+    .homepage-card-link:hover .card-link {
+        color: #ccc;
+    }
+    .photo-grid-item-info h2 {
+        color: #eee;
+    }
+    /* Dark mode for single photo view */
+    .photo-detail-container img {
+        box-shadow: 0 4px 20px rgba(255,255,255,0.08); /* A lighter shadow for dark mode */
+    }
+    .photo-link {
+        color: #fff;
+    }
+    .photo-link:hover {
+        color: #ccc;
+    }
+
+    .placeholder-image {
+        background-color: #222;
+        color: #666;
+    }
+
+    /* Dark Mode Adjustments for Side Projects */
+    .category-list-item {
+        border-color: #444;
+        background-color: #1a1a1a;
+    }
+    .category-list-icon-wrapper {
+        background-color: #2a2a2a;
+    }
+    /* Invert the actual SVG/PNG icons to white, but not the placeholder */
+    .category-list-icon-wrapper .category-icon:not(.placeholder-icon) {
+        filter: invert(100%);
+    }
+    .category-list-info p {
+        color: #aaa;
+    }
+    .project-item {
+        border-color: #444;
+        background-color: #1a1a1a;
+    }
+    
+    .project-button {
+        color: #fff; /* White text for links in dark mode */
+    }
+    .project-button:hover {
+        color: #ccc; /* Lighter gray for hover in dark mode */
+    }
+    .project-info h2 {
+        color: #eee;
+    }
+    .project-info p {
+        color: #bbb;
+    }
+
+    /* Dark Mode for Discography */
+    .action-button { /* Unified dark mode style */
+        color: #fff;
+        border-color: #555;
+    }
+    .action-button:hover,
+    .action-button.active {
+        background-color: #fff;
+        color: #000;
+    }
+    .discography-item {
+        border-color: #444;
+        background-color: #1a1a1a;
+    }
+    .discography-item-image-wrapper {
+        background-color: #111; /* Darker letterbox for dark mode */
+    }
+    .discography-item-info {
+        border-top-color: #333;
+    }
+    .discography-item-info h3 {
+        color: #eee;
+    }
+    .discography-item-info p {
+        color: #aaa;
+    }
+    .discography-item.placeholder h3 {
+        color: #eee;
+    }
+
+    .discography-item.placeholder p {
+        color: #aaa;
+    }
+    
+    /* Read More Button Dark Mode */
+    .read-more-btn {
+        background-color: #fff;
+        color: #000;
+        border: 1px solid #fff;
+    }
+    .read-more-btn:hover {
+        background-color: transparent;
+        color: #fff;
+    }
+
+    /* Footer dark mode */
+    .site-footer {
+        background: #000000; /* Slightly off-black for footer background */
+        color: #eee;
+        /* border-top: 1px solid #333; /* Optional: To have a top separator for the footer */
+    }
+    .footer-col h3 {
+        color: #fff;
+    }
+    .footer-col a,
+    .footer-backtotop a {
+        color: #eee;
+    }
+    .footer-col a:hover,
+    .footer-backtotop a:hover {
+        color: #bbb;
+    }
+
+    .discography-item-placeholder h2 {
+        color: #eee;
+    }
+    .discography-item-placeholder p {
+        color: #aaa;
+    }
+
+    /* Footer dark mode */
+    .site-footer {
+        background: #000000; /* Slightly off-black for footer background */
+        color: #eee;
+        /* border-top: 1px solid #333; /* Optional: To have a top separator for the footer */
+    }
+    .footer-col h3 {
+        color: #fff;
+    }
+    .footer-col a,
+    .footer-backtotop a {
+        color: #eee;
+    }
+    .footer-col a:hover,
+    .footer-backtotop a:hover {
+        color: #bbb;
+    }
+
+    /* Dark Mode for Extended Info */
+    .release-annotation h3,
+    .release-tracklist h3 {
+        border-bottom-color: #444;
+    }
+    .release-tracklist details {
+        border-color: #444;
+    }
+    .release-tracklist summary {
+        background-color: #222;
+        color: #eee;
+    }
+    .tracklist-content {
+        background-color: #1a1a1a;
+    }
+    .tracklist-table th {
+        background-color: #222;
+        color: #ddd;
+        border-bottom-color: #444;
+    }
+    .tracklist-table td {
+        border-bottom-color: #333;
+        color: #ccc;
+    }
+    .track-artist-header {
+        background-color: #222;
+        color: #ddd;
+    }
+    .track-credits {
+        color: #888;
+    }
+}
