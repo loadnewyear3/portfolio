@@ -1,32 +1,24 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
-  <channel>
-    <title>Posts on Echo Nayak</title>
-    <link>http://localhost:1313/posts/</link>
-    <description>Recent content in Posts on Echo Nayak</description>
-    <generator>Hugo</generator>
-    <language>en-us</language>
-    <lastBuildDate>Mon, 08 Jun 2026 21:29:27 +0530</lastBuildDate>
-    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Social Media Hub</title>
-      <link>http://localhost:1313/posts/social-media-hub/</link>
-      <pubDate>Mon, 08 Jun 2026 21:29:27 +0530</pubDate>
-      <guid>http://localhost:1313/posts/social-media-hub/</guid>
-      <description>&lt;hr&gt;
-&lt;h2 id=&#34;automated-content-pipeline&#34;&gt;Automated Content Pipeline&lt;/h2&gt;
-&lt;p&gt;This workflow bridges multple APIs to autmoate content distribution across platforms.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Trigger:&lt;/strong&gt; Webhook intercepts an incoming data payload.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Logic:&lt;/strong&gt; A custom JavaScript node parses and reformats the JSON string.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Action:&lt;/strong&gt; Dispatches formatted alerts to Discord or a platform of you choosing.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;</description>
-    </item>
-  </channel>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Posts on Echo Nayak</title>
+		<link>http://localhost:1313/posts/</link>
+		<description>Recent content in Posts on Echo Nayak</description>
+		<generator>Hugo</generator>
+		<language>en-us</language>
+		
+		
+		
+		
+			<lastBuildDate>Mon, 08 Jun 2026 21:29:27 +0530</lastBuildDate>
+		
+			<atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Social Media Hub</title>
+				<link>http://localhost:1313/posts/social-media-hub/</link>
+				<pubDate>Mon, 08 Jun 2026 21:29:27 +0530</pubDate>
+				<guid>http://localhost:1313/posts/social-media-hub/</guid>
+				<description>&lt;hr&gt;&#xA;&lt;h2 id=&#34;automated-content-pipeline&#34;&gt;Automated Content Pipeline&lt;/h2&gt;&#xA;&lt;p&gt;This workflow bridges multple APIs to autmoate content distribution across platforms.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Trigger:&lt;/strong&gt; Webhook intercepts an incoming data payload.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Logic:&lt;/strong&gt; A custom JavaScript node parses and reformats the JSON string.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Action:&lt;/strong&gt; Dispatches formatted alerts to Discord or a platform of you choosing.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+			</item>
+	</channel>
 </rss>
