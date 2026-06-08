@@ -31,7 +31,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      HUGO_VERSION: 0.128.0
+      HUGO_VERSION: 0.146.0 # 1. Bumped to the version PaperMod requires
     steps:
       - name: Install Hugo CLI
         run: |
@@ -43,6 +43,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: recursive
+          fetch-depth: 0 # 2. Added to ensure PaperMod can trace theme versions accurately
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
